@@ -1,0 +1,28 @@
+{
+  "name": "and-vote",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node ./bin/www",
+    "dev": "nodemon -w ./ -x npm run start"
+  },
+  "devDependencies": {
+    "eslint": "^2.13.1",
+    "eslint-config-standard": "^5.3.1",
+    "eslint-config-standard-jsx": "^1.2.1",
+    "eslint-config-standard-react": "^2.4.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^5.2.2",
+    "eslint-plugin-standard": "^3.0.1",
+    "nodemon": "^1.11.0"
+  },
+  "dependencies": {
+    "babel-preset-node5": "^11.0.2",
+    "babel-register": "^6.7.2",
+    "express": "^4.15.4"
+  },
+  "babel": {
+    "presets": [
+      "node5"
+    ]
+  }
+}
