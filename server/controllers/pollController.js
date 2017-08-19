@@ -18,8 +18,22 @@ pollController.handlePost = function (req, res, next) {
     await db.models.pollOption.bulkCreate(pollOption, {
       transaction
     })
-    res.sendStatus(201)
+    res.status(201).json({
+      createdPollId: createdPoll.dataValues.id
+    })
   }).catch(next)
 }
 
+pollController.handleGet = async function (req, res, next) {
+  try {
+    const foundPoll = await db.models.poll.findOne({
+      where: {
+        id: req.params.pollId
+      }
+    })
+    res.status(200).json(foundPoll.dataValues)
+  } catch (err) {
+    next(err)
+  }
+}
 export default pollController
