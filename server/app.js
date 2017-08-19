@@ -1,4 +1,6 @@
 import express from 'express'
+import chalk from 'chalk'
+import errorHandler from './middleware/errorHandler'
 import db from 'sequelize-connect'
 import path from 'path'
 import pollController from './controllers/pollController'
@@ -20,13 +22,16 @@ async function connect () {
   try {
     await connect()
   } catch (err) {
-    console.log(`An error occurred when connecting: ${err}`)
+    console.log(chalk.red(`An error occurred when connecting: ${err}`))
   }
   const app = express()
   app.use(bodyParser.json())
   app.post('/api/poll', pollController.handlePost)
   app.get('/api/poll/:pollId', pollController.handleGet)
   app.post('/api/vote', voteController.handlePost)
+
+  app.use(errorHandler)
+
   const port = 3000
   app.listen(port, () => console.log(`Running on port ${port}`))
 })()
