@@ -29,6 +29,14 @@ pollController.handleGet = async function (req, res, next) {
     const foundPoll = await db.models.poll.findOne({
       where: {
         id: req.params.pollId
+      },
+      attributes: ['question'],
+      include: {
+        model: db.models.pollOption,
+        attributes: [
+          ['id', 'optionId'],
+          'text'
+        ]
       }
     })
     res.status(200).json(foundPoll.dataValues)
