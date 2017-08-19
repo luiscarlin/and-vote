@@ -7,7 +7,8 @@ async function connect () {
   db.matcher = function shouldImportModel (modelFileName) {
     return true
   }
-  await db.connect('andvote_schema', 'root', '', {
+  await db.connect('andvote_schema', 'root', 'root', {
+    port: 3306,
     force: false
   })
 }
