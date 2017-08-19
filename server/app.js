@@ -12,7 +12,7 @@ async function connect () {
   }
   await db.connect('andvote_schema', 'root', 'root', {
     port: 3306,
-    force: true
+    force: false
   })
 }
 

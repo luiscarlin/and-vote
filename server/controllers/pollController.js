@@ -30,13 +30,19 @@ pollController.handleGet = async function (req, res, next) {
       where: {
         id: req.params.pollId
       },
+      group: ['pollOptions.id'],
       attributes: ['question'],
       include: {
         model: db.models.pollOption,
         attributes: [
           ['id', 'optionId'],
-          'text'
-        ]
+          'text',
+          [db.sequelize.fn('COUNT', db.sequelize.col('pollOptions.votes.id')), 'voteCount']
+        ],
+        include: {
+          model: db.models.vote,
+          attributes: []
+        }
       }
     })
     res.status(200).json(foundPoll.dataValues)
