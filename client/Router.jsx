@@ -11,8 +11,8 @@ const rootRoute = (
   <Router history={browserHistory}>
     <Route path='/' component={Layout}>
       <IndexRoute component={CreatePoll} />
-      <Route path='v' component={VotePoll} />
-      <Route path='r' component={ResultPoll} />
+      <Route path='v/:pollId' component={VotePoll} />
+      <Route path='r/:pollId' component={ResultPoll} />
     </Route>
   </Router>
 )
