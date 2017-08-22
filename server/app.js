@@ -31,8 +31,9 @@ async function connect () {
   db.matcher = function shouldImportModel (modelFileName) {
     return true
   }
-  await db.connect('andvote_schema', 'root', 'root', {
-    port: 3306,
+  await db.connect(process.env.DB_SCHEMA, process.env.DB_USER, process.env.DB_PWD, {
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
     force: false
   })
 }
