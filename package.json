@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon -w ./ -x npm run start"
+    "dev": "nodemon -w ./ -x npm run start",
+    "web": "npm run start"
   },
   "devDependencies": {
     "babel-eslint": "^6.0.4",
@@ -40,5 +41,8 @@
     "presets": [
       "node5"
     ]
+  },
+  "engines": {
+    "node": "6.9.5"
   }
 }
