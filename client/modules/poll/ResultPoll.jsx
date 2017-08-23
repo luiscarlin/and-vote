@@ -1,5 +1,6 @@
 import React from 'react'
 import $ from 'jquery'
+import { Link } from 'react-router'
 
 class ResultPoll extends React.Component {
   constructor (props) {
@@ -34,6 +35,7 @@ class ResultPoll extends React.Component {
   }
 
   render () {
+    const { pollId } = this.props.params
     const { question, pollOptions, loading, error } = this.state
     return (
       <div className='text-center'>
@@ -49,6 +51,7 @@ class ResultPoll extends React.Component {
             </div>
           )
         }) : null}
+        {!loading && !error ? <Link to={`/v/${pollId}`}>Vote on the Poll</Link> : null }
       </div>
     )
   }
