@@ -37,6 +37,7 @@ class ResultPoll extends React.Component {
   render () {
     const { pollId } = this.props.params
     const { question, pollOptions, loading, error } = this.state
+
     return (
       <div className='text-center'>
         <h2>ResultPoll</h2>
