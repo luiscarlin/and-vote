@@ -1,4 +1,6 @@
 import React from 'react'
+import $ from 'jquery'
+import { browserHistory } from 'react-router'
 
 class CreatePoll extends React.Component {
   constructor (props) {
@@ -73,17 +75,35 @@ class CreatePoll extends React.Component {
   createPoll (event) {
     event.preventDefault()
     const { question } = this.refs
+    const { alert } = window
+
     const data = {
       question: question.value.trim(),
       options: []
     }
 
     for (const option in this.refs) {
-      if (option !== 'question') {
-        data.options.push(this.refs[option].value)
+      const trimmedOptionVal = this.refs[option].value.trim()
+
+      if (option !== 'question' && trimmedOptionVal !== '') {
+        data.options.push(trimmedOptionVal)
       }
     }
-    console.log(data)
+    // validation
+
+    $.ajax({
+      method: 'POST',
+      url: '/api/poll',
+      data: JSON.stringify(data),
+      dataType: 'json',
+      contentType: 'application/json'
+    }).always((data) => {
+      if (data.status === 400) {
+        return alert('There was a problem creating the poll')
+      }
+      const { createdPollId } = data
+      browserHistory.push(`/v/${createdPollId}`)
+    })
   }
 }
 
