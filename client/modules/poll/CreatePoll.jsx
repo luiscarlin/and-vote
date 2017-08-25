@@ -12,15 +12,28 @@ class CreatePoll extends React.Component {
 
   render () {
     const options = this.createOPtions()
+
     return (
       <div className='container'>
-        <h2>CreatePoll</h2>
-        <form style={{border: '1px solid black'}} onSubmit={this.createPoll.bind(this)}>
-          <label>Question:</label>
-          <input type='text' ref='question' placeholder='Enter a question...' /> <br />
-          {options}
-          <button type='submit'>Create Poll</button>
-        </form>
+        <div className='row'>
+          <div className='panel panel-default col-sm-6 col-sm-offset-3'>
+            <div className='panel-body'>
+              <h2 className='text-center'>Create Poll</h2>
+              <form onSubmit={this.createPoll.bind(this)}>
+                <div className='form-group'>
+                  <label>Question</label>
+                  <input className='form-control' ref='question' placeholder='Enter a question...' /> <br />
+                </div>
+                {options}
+                <div className='row'>
+                  <div className='col-sm-4 col-sm-offset-4'>
+                    <button className='btn btn-sm btn-block btn-primary center-block'type='submit'>Create Poll</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }
@@ -44,15 +57,16 @@ class CreatePoll extends React.Component {
       }
 
       const optionInput = (
-        <div key={index}>
+        <div key={index} className='form-group'>
           <label>Option {index}</label>
-        <input
-          type='text'
-          ref={`option${index}`}
-          placeholder='Enter an option...'
-          onFocus={addOption}
-          onBlur={removeOption}
-        /> <br />
+          <input
+            className='form-control'
+            type='text'
+            ref={`option${index}`}
+            placeholder='Enter an option...'
+            onFocus={addOption}
+            onBlur={removeOption}
+          />
         </div>
       )
       options.push(optionInput)
