@@ -6,6 +6,7 @@ import path from 'path'
 import pollController from './controllers/pollController'
 import voteController from './controllers/voteController'
 import bodyParser from 'body-parser'
+import compression from 'compression'
 
 import webpack from 'webpack'
 import webpackMiddleware from 'webpack-dev-middleware'
@@ -58,6 +59,23 @@ async function connect () {
   })
 
   app.use(errorHandler)
+
+  const isDeveloping = process.env.NODE_ENV !== 'production'
+  console.log(isDeveloping)
+  if (isDeveloping) {
+    app.use(middleware)
+    app.use(webpackHotMiddleware(compiler))
+    app.get('*', function response (req, res) {
+      res.write(middleware.fileSystem.readFileSync(path.join(__dirname, '../dist/index.html')))
+      res.end()
+    })
+  } else {
+    app.use(compression())
+    app.use(express.static(path.join(__dirname, '../dist')))
+    app.get('*', function response (req, res) {
+      res.sendFile(path.join(__dirname, '../dist/index.html'))
+    })
+  }
 
   const port = 3000
   app.listen(port, () => console.log(`Running on port ${port}`))
