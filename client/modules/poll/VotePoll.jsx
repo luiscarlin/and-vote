@@ -72,7 +72,7 @@ class VotePoll extends React.Component {
     const { pollId } = this.props.params
 
     if (!optionIdChecked) {
-      alert('Please select an option')
+      return alert('Please select an option')
     }
 
     const data = {

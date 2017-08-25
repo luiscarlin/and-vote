@@ -89,7 +89,12 @@ class CreatePoll extends React.Component {
         data.options.push(trimmedOptionVal)
       }
     }
-    // validation
+
+    const error = this.validatePoll.bind(this)(data)
+
+    if (error) {
+      return alert(error)
+    }
 
     $.ajax({
       method: 'POST',
@@ -104,6 +109,20 @@ class CreatePoll extends React.Component {
       const { createdPollId } = data
       browserHistory.push(`/v/${createdPollId}`)
     })
+  }
+
+  validatePoll (pollData) {
+    const { question, options } = pollData
+
+    if (question.length < 8) {
+      return 'Question must be at least 8 characters long'
+    }
+    
+    if (options.length < 2) {
+      return 'At least 2 options are required for a poll'
+    }
+    // everything is good
+    return false
   }
 }
 
