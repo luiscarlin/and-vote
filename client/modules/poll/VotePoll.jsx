@@ -40,23 +40,39 @@ class VotePoll extends React.Component {
     const { question, pollOptions, loading, error } = this.state
 
     return (
-      <div className='text-center'>
-        <h2>VotePoll</h2>
-        <h4>QUESTION: {question}</h4>
-        <form onSubmit={this.castVote.bind(this)}>
-          {!loading && !error ? pollOptions.map((pollOption, i) => {
-            const { optionId, text } = pollOption
-            return (
-              <div key={i} style={{border: '1px solid black'}}>
-                <p>Id: {optionId}</p>
-                <p>Option: {text}</p>
-                <input type='radio' name='option' onClick={this.checkedOption.bind(this, optionId)} />
-              </div>
-            )
-          }) : null}
-          <button type='submit' style={{margin: 12}} className='btn btn-lg btn-primary'>Cast Vote</button>
-        </form>
-        {!loading && !error ? <Link to={`/r/${pollId}`}>Results on the Poll</Link> : null }
+      <div className='container'>
+        <div className='row'>
+          <div className='panel panel-default col-sm-offset-3 col-sm-6' style={{marginBottom: 4}}>
+            <div className='panel-body'>
+              <h2 className='text-center' style={{marginTop: 0}}>{question}</h2>
+              {error ? <h4 style={{color: 'red'}}>Cannot find poll</h4> : null}
+              <form onSubmit={this.castVote.bind(this)}>
+                {!loading ? pollOptions.map((pollOption, i) => {
+                  const { optionId, text } = pollOption
+                  return (
+                    <div key={i} className='radio text-center' style={{margin: 12}}>
+                      <label style={{fontSize: 24}}>
+                        <input
+                          type='radio'
+                          onClick={this.checkedOption.bind(this, optionId)}
+                          name='option'
+                          value={optionId}
+                          style={{marginTop: 10}}
+                        /> {text}
+                      </label>
+                    </div>
+                  )
+                }) : null}
+                <div className='row'>
+                  <div className='col-sm-4 col-sm-offset-4'>
+                    <button className='btn btn-block btn-primary center-block' type='submit'>Vote</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <Link className='text-center center-block' to={`/r/${pollId}`}>Poll Results</Link>
       </div>
     )
   }

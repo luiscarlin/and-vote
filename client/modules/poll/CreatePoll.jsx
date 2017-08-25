@@ -27,7 +27,7 @@ class CreatePoll extends React.Component {
                 {options}
                 <div className='row'>
                   <div className='col-sm-4 col-sm-offset-4'>
-                    <button className='btn btn-sm btn-block btn-primary center-block'type='submit'>Create Poll</button>
+                    <button className='btn btn-block btn-primary center-block'type='submit'>Create</button>
                   </div>
                 </div>
               </form>
@@ -131,7 +131,7 @@ class CreatePoll extends React.Component {
     if (question.length < 8) {
       return 'Question must be at least 8 characters long'
     }
-    
+
     if (options.length < 2) {
       return 'At least 2 options are required for a poll'
     }

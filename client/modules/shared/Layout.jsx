@@ -1,11 +1,12 @@
 import React from 'react'
+import Navbar from './Navbar.jsx'
 
 class Layout extends React.Component {
   render () {
     const content = this.props.children
     return (
-      <div className='container'>
-        <h2>Layout</h2>
+      <div>
+        <Navbar />
         {content}
       </div>
     )

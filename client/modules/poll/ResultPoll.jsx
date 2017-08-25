@@ -39,21 +39,26 @@ class ResultPoll extends React.Component {
     const { question, pollOptions, loading, error } = this.state
 
     return (
-      <div className='text-center'>
-        <h2>ResultPoll</h2>
-        <h4>QUESTION: {question}</h4>
-        {!loading && !error ? pollOptions.map((pollOption, i) => {
-          const { optionId, text, voteCount } = pollOption
-          return (
-            <div key={i} style={{border: '1px solid black'}}>
-              <p>Id: {optionId}</p>
-              <p>Option: {text}</p>
-              <p>Votes: {voteCount}</p>
-            </div>
-          )
-        }) : null}
-        {!loading && !error ? <Link to={`/v/${pollId}`}>Vote on the Poll</Link> : null }
-      </div>
+      <div className="container">
+       <div className='row'>
+         <div className='panel panel-default col-sm-offset-3 col-sm-6'>
+           <h2 className='text-center'>Poll Result</h2>
+           <div className='panel-body text-center'>
+             <h3>{question}</h3>
+             {!loading ? pollOptions.map((option, i) => {
+               const { text, voteCount } = option
+               return (
+                 <div key={i} className="well well-sm">
+                   <h4>Option: {text}</h4>
+                   <h4>Votes: {voteCount}</h4>
+                 </div>
+               )
+             }) : null}
+             <Link to={`/v/${pollId}`}>Vote on this poll</Link>
+           </div>
+         </div>
+       </div>
+     </div>
     )
   }
 }
