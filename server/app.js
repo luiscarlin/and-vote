@@ -61,7 +61,8 @@ async function connect () {
   app.use(errorHandler)
 
   const isDeveloping = process.env.NODE_ENV !== 'production'
-  console.log(isDeveloping)
+  console.log(`Running on development mode: ${isDeveloping}`)
+
   if (isDeveloping) {
     app.use(middleware)
     app.use(webpackHotMiddleware(compiler))
@@ -76,7 +77,6 @@ async function connect () {
       res.sendFile(path.join(__dirname, '../dist/index.html'))
     })
   }
-
-  const port = 3000
+  let port = process.env.PORT || 3000 
   app.listen(port, () => console.log(`Running on port ${port}`))
 })()
