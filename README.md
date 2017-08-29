@@ -7,7 +7,7 @@ Voting web application using:
 - Webpack
 - Bootstrap
 
-Push to master to see it runing [here](https://andvote-luis.herokuapp.com/)
+Push to master to see it running [here](https://andvote-luis.herokuapp.com/)
 
 ### Run Dev
 
